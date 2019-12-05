@@ -11,6 +11,7 @@ import akka.stream.javadsl.Flow;
 import java.io.IOException;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.concurrent.CompletionStage;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -25,12 +26,10 @@ public class Main {
                 ConnectHttp.toHost("localhost", 8080),
                 materializer
         );
-        System.out.println("Server online at http://localhost:8080/\nPress
-                RETURN to stop...");
+        System.out.println("Server online at http://localhost:8080/\nPress RETURN to stop...");
         System.in.read();
         binding
                 .thenCompose(ServerBinding::unbind)
-                .thenAccept(unbound -> system.terminate()); // and shutdown
-        when done
+                .thenAccept(unbound -> system.terminate()); // and shutdown when done
     }
 }
