@@ -1,4 +1,4 @@
 package lab5;
 
-public class testRequest {
+public class TestRequest {
 }
