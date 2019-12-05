@@ -14,7 +14,7 @@ public class HttpClient {
         return Flow.of(HttpRequest.class)
                 .map(request -> new Pair<String, Integer>(
                         request.getUri().query().getOrElse("testURL", ""),
-                        request.getUri().query().getOrElse("")
+                        request.getUri().query().getOrElse("count", "")
                         ))
 //                .mapAsync()
     }
