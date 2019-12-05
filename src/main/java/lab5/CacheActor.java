@@ -14,8 +14,9 @@ public class CacheActor extends AbstractActor {
     public Receive createReceive() {
         return receiveBuilder()
                 .match(Pair.class, mail -> {
-                    if (hashRes.containsKey(mail.first())) {
-                        sender().tell(new TestResponse(mail.getHostName(), hashRes.get(mail.getHostName())), self());
+                    String key = (String) mail.first();
+                    if (hashRes.containsKey(key)) {
+                        sender().tell(new TestResponse(key, hashRes.get(key)), self());
                     } else {
                         sender().tell("NotFound", self());
                     }
