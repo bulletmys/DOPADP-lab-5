@@ -12,6 +12,7 @@ import akka.stream.javadsl.Flow;
 
 
 import java.time.Duration;
+import java.util.concurrent.CompletableFuture;
 
 
 public class HttpClient {
@@ -36,7 +37,7 @@ public class HttpClient {
                                     if (response.getClass() == String.class) {
                                         //считаем время и записываем его
                                     } else {
-                                        return 
+                                        CompletableFuture.completedFuture()
                                     }
                                 })
     });
