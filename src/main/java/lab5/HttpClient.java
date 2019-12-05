@@ -26,7 +26,7 @@ public class HttpClient {
 
     private ActorRef cacheActor;
     private Duration duration = Duration.ofSeconds(5);
-    private Sink<Pair<String, Integer>, CompletionStage<Integer>> testSink = Flow.
+    private Sink<Pair<String, Integer>, CompletionStage<Integer>> testSink = Flow.create()
 
     HttpClient(ActorSystem system) {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
