@@ -16,7 +16,7 @@ import java.time.Duration;
 public class HttpClient {
 
     private ActorRef cacheActor;
-    private Duration duration = 
+    private Duration duration = Duration.
 
     HttpClient(ActorSystem system) {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
