@@ -43,7 +43,7 @@ public class HttpClient {
                                 }))
                 .map(value -> {
                     cacheActor.tell(value, ActorRef.noSender());
-                    return HttpResponse.create()
+                    return HttpResponse.create().withEntity((TestResponse)value)
                 })
     });
 }
