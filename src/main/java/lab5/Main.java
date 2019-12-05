@@ -18,8 +18,10 @@ public class Main {
         final Http http = Http.get(system);
         final ActorMaterializer materializer =
                 ActorMaterializer.create(system);
-        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = <вызов
-        метода которому передаем Http, ActorSystem и ActorMaterializer>;
+        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = <
+//        вызов
+//        метода которому передаем Http, ActorSystem и ActorMaterializer
+        >;
         final CompletionStage<Ser
         verBinding> binding = http.bindAndHandle(
                 routeFlow,
