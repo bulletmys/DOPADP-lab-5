@@ -39,7 +39,7 @@ public class HttpClient {
                         Patterns.ask(cacheActor, request, duration)
                                 .thenCompose((response) -> {
                                     if (response.getClass() == String.class) {
-                                        Source.from(Collections.singletonList(r))
+                                        Source.from(Collections.singletonList(re))
                                                 .toMat(testSink, Keep.right()).run(materializer);
                                         return CompletableFuture.completedFuture(response);
                                     } else {
