@@ -46,9 +46,8 @@ public class HttpClient {
                     cacheActor.tell(value, ActorRef.noSender());
                     return HttpResponse.create().withEntity(
                             HttpEntities.create(
-                                    ((TestResponse)value).getAverageTime() 
-                            )
-                })
-    });
-}
+                                    ((TestResponse) value).getAverageTime() + " - " + ((TestResponse) value).getHostName()
+                            ));
+                });
+    }
 }
