@@ -7,6 +7,8 @@ import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import javafx.util.Pair;
 
+import java.util.regex.Pattern;
+
 
 public class HttpClient {
 
@@ -18,7 +20,7 @@ public class HttpClient {
                             Integer.parseInt(request.getUri().query().getOrElse("count", "")));
                 })
                 .mapAsync(3, (request) -> {
-                    
+                    Pattern
                 });
     }
 }
