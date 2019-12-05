@@ -43,6 +43,7 @@ public class HttpClient {
                                 }))
                 .map(value -> {
                     
+                    cacheActor.tell(new TestResponse(value));
                 })
     });
 }
