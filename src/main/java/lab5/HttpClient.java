@@ -18,13 +18,14 @@ import akka.stream.javadsl.Source;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 
 public class HttpClient {
 
     private ActorRef cacheActor;
     private Duration duration = Duration.ofSeconds(5);
-    private Sink<Pair<String, Integer>, >
+    private Sink<Pair<String, Integer>, CompletionStage>
 
     HttpClient(ActorSystem system) {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
