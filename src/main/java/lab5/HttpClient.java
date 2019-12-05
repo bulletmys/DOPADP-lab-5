@@ -3,6 +3,7 @@ package lab5;
 import akka.NotUsed;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
+import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import javafx.util.Pair;
@@ -20,7 +21,7 @@ public class HttpClient {
                             Integer.parseInt(request.getUri().query().getOrElse("count", "")));
                 })
                 .mapAsync(3, (request) -> {
-                    Pattern
+                    Patterns.ask()
                 });
     }
 }
