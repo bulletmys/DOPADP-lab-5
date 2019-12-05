@@ -9,7 +9,8 @@ public class Main {
                 ActorMaterializer.create(system);
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = <вызов
         метода которому передаем Http, ActorSystem и ActorMaterializer>;
-        final CompletionStage<ServerBinding> binding = http.bindAndHandle(
+        final CompletionStage<Ser
+        verBinding> binding = http.bindAndHandle(
                 routeFlow,
                 ConnectHttp.toHost("localhost", 8080),
                 materializer
