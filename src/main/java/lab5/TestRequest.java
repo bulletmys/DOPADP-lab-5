@@ -1,17 +1,19 @@
 package lab5;
 
+import javafx.util.Pair;
+
 public class TestRequest {
-    private String hostName;
+    private Pair<String, Integer> req;
 
-    TestRequest(String hostName) {
-        this.hostName = hostName;
+    TestRequest(Pair<String, Integer> pair) {
+        this.req = pair;
     }
 
-    public void setHostName(String hostName) {
-        this.hostName = hostName;
+    public Pair<String, Integer> getReq() {
+        return req;
     }
 
-    public String getHostName() {
-        return hostName;
+    public void setReq(Pair<String, Integer> req) {
+        this.req = req;
     }
 }
