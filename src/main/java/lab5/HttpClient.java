@@ -16,7 +16,7 @@ import java.time.Duration;
 public class HttpClient {
 
     private ActorRef cacheActor;
-    private Duration duration = Duration.ofMillis()
+    private Duration duration = Duration.ofSeconds(5);
 
     HttpClient(ActorSystem system) {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
@@ -30,7 +30,8 @@ public class HttpClient {
                             Integer.parseInt(request.getUri().query().getOrElse("count", "")));
                 })
                 .mapAsync(3, (request) ->
-                    Patterns.ask(cacheActor, request, ).thenCompose()
+                    Patterns.ask(cacheActor, request, duration)
+                            .thenCompose()
                 });
     }
 }
