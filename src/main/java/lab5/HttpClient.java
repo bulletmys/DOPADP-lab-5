@@ -10,12 +10,10 @@ import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import javafx.util.Pair;
 
-import java.util.regex.Pattern;
-
 
 public class HttpClient {
 
-    ActorRef cacheActor;
+    private ActorRef cacheActor;
 
     HttpClient(ActorSystem system) {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
@@ -30,7 +28,7 @@ public class HttpClient {
                 })
                 .mapAsync(3, (request) -> {
                     Patterns.ask(cacheActor, request, 5000)
-                            .
+                            .thenCompose()
                 });
     }
 }
