@@ -13,9 +13,10 @@ public class HttpClient {
     Flow<HttpRequest, HttpResponse, NotUsed> httpFlow(ActorMaterializer materializer) {
         return Flow.of(HttpRequest.class)
                 .map(request -> {
-                    return new Pair<String, Integer>(
+                    new Pair<String, Integer>(
                             request.getUri().query().getOrElse("testURL", ""),
                             Integer.parseInt(request.getUri().query().getOrElse("count", "")));
-                });
+                })
+                .mapAsync();
     }
 }
