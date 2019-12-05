@@ -41,7 +41,9 @@ public class HttpClient {
                                         return CompletableFuture.completedFuture(response);
                                     }
                                 }))
-                .map()
+                .map(value -> {
+                    
+                })
     });
 }
 }
