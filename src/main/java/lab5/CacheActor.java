@@ -26,7 +26,7 @@ public class CacheActor extends AbstractActor {
     }
 
     public static Props props() {
-        return Props.create(TestKeeperActor.class);
+        return Props.create(CacheActor.class);
     }
 
 }
