@@ -30,6 +30,7 @@ public class HttpClient {
                 })
                 .mapAsync(3, (request) -> {
                     Patterns.ask(cacheActor, new TestRequest(request), 5000)
+                            .
                 });
     }
 }
