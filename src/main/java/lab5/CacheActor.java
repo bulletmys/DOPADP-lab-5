@@ -2,6 +2,7 @@ package lab5;
 
 import akka.actor.AbstractActor;
 import akka.actor.Props;
+import akka.japi.Pair;
 
 import java.util.HashMap;
 
@@ -12,8 +13,8 @@ public class CacheActor extends AbstractActor {
     @Override
     public Receive createReceive() {
         return receiveBuilder()
-                .match(TestRequest.class, mail -> {
-                    if (hashRes.containsKey(mail.getHostName())) {
+                .match(Pair.class, mail -> {
+                    if (hashRes.containsKey(mail.first())) {
                         sender().tell(new TestResponse(mail.getHostName(), hashRes.get(mail.getHostName())), self());
                     } else {
                         sender().tell("NotFound", self());
