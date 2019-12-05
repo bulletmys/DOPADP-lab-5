@@ -31,11 +31,14 @@ public class HttpClient {
                             Integer.parseInt(request.getUri().query().getOrElse("count", "")));
                 })
                 .mapAsync(3, (request) ->
-                    Patterns.ask(cacheActor, request, duration)
-                            .thenCompose((response) -> {
-                                if (response.getClass() == String.class) {
-                                    
-                            })
-                });
-    }
+                        Patterns.ask(cacheActor, request, duration)
+                                .thenCompose((response) -> {
+                                    if (response.getClass() == String.class) {
+                                        //считаем время и записываем его
+                                    } else {
+                                        return 
+                                    }
+                                })
+    });
+}
 }
