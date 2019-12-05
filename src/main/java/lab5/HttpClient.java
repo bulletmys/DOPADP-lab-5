@@ -19,13 +19,14 @@ import java.time.Duration;
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.concurrent.Future;
 
 
 public class HttpClient {
 
     private ActorRef cacheActor;
     private Duration duration = Duration.ofSeconds(5);
-    private Sink<Pair<String, Integer>, CompletionStage>
+    private Sink<Pair<String, Integer>, CompletionStage<Integer>> testSink = Future.
 
     HttpClient(ActorSystem system) {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
