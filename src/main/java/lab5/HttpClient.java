@@ -1,6 +1,7 @@
 package lab5;
 
 import akka.NotUsed;
+import akka.actor.ActorRef;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.pattern.Patterns;
@@ -12,6 +13,10 @@ import java.util.regex.Pattern;
 
 
 public class HttpClient {
+
+    ActorRef cacheActor;
+
+    HttpClient()
 
     Flow<HttpRequest, HttpResponse, NotUsed> httpFlow(ActorMaterializer materializer) {
         return Flow.of(HttpRequest.class)
