@@ -17,6 +17,6 @@ public class HttpClient {
                             request.getUri().query().getOrElse("testURL", ""),
                             Integer.parseInt(request.getUri().query().getOrElse("count", "")));
                 })
-                .mapAsync();
+                .mapAsync(3, );
     }
 }
