@@ -42,8 +42,8 @@ public class HttpClient {
                                     }
                                 }))
                 .map(value -> {
-
                     cacheActor.tell(value, ActorRef.noSender());
+                    return 
                 })
     });
 }
