@@ -36,8 +36,9 @@ public class HttpClient {
                                 .thenCompose((response) -> {
                                     if (response.getClass() == String.class) {
                                         //считаем время и записываем его
+                                        return CompletableFuture.completedFuture(response);
                                     } else {
-                                        CompletableFuture.completedFuture()
+                                        return CompletableFuture.completedFuture(response);
                                     }
                                 })
     });
