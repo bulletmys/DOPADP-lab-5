@@ -10,10 +10,13 @@ import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import javafx.util.Pair;
 
+import java.time.Duration;
+
 
 public class HttpClient {
 
     private ActorRef cacheActor;
+    private Duration duration = 
 
     HttpClient(ActorSystem system) {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
@@ -26,7 +29,8 @@ public class HttpClient {
                             request.getUri().query().getOrElse("testURL", ""),
                             Integer.parseInt(request.getUri().query().getOrElse("count", "")));
                 })
-                .mapAsync(3, (request) -> {Patterns.
+                .mapAsync(3, (request) ->
+                    Patterns.ask(cacheActor, request, ).thenCompose()
                 });
     }
 }
