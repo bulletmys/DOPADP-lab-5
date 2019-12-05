@@ -3,6 +3,7 @@ package lab5;
 import akka.NotUsed;
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
+import akka.http.javadsl.model.HttpEntities;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.japi.Pair;
@@ -43,7 +44,8 @@ public class HttpClient {
                                 }))
                 .map(value -> {
                     cacheActor.tell(value, ActorRef.noSender());
-                    return HttpResponse.create().withEntity((TestResponse)value)
+                    return HttpResponse.create().withEntity(
+                            HttpEntities.create((TestResponse)value))
                 })
     });
 }
