@@ -10,9 +10,12 @@ import akka.japi.Pair;
 import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
+import akka.stream.javadsl.Keep;
+import akka.stream.javadsl.Source;
 
 
 import java.time.Duration;
+import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 
 
@@ -36,7 +39,8 @@ public class HttpClient {
                         Patterns.ask(cacheActor, request, duration)
                                 .thenCompose((response) -> {
                                     if (response.getClass() == String.class) {
-                                        //считаем время и записываем его
+                                        Source.from(Collections.singletonList(r))
+                                                .toMat(testSink, Keep.right()).run(materializer);
                                         return CompletableFuture.completedFuture(response);
                                     } else {
                                         return CompletableFuture.completedFuture(response);
