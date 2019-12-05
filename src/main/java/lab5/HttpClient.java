@@ -10,6 +10,6 @@ import java.net.http.HttpResponse;
 public class HttpClient {
 
     Flow<HttpRequest, HttpResponse, NotUsed> httpFlow(ActorMaterializer materializer) {
-        return Flow
+        return Flow.of()
     }
 }
