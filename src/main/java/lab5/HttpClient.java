@@ -2,6 +2,7 @@ package lab5;
 
 import akka.NotUsed;
 import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.pattern.Patterns;
@@ -16,7 +17,9 @@ public class HttpClient {
 
     ActorRef cacheActor;
 
-    HttpClient()
+    HttpClient(ActorSystem system) {
+        cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
+    }
 
     Flow<HttpRequest, HttpResponse, NotUsed> httpFlow(ActorMaterializer materializer) {
         return Flow.of(HttpRequest.class)
@@ -26,7 +29,7 @@ public class HttpClient {
                             Integer.parseInt(request.getUri().query().getOrElse("count", "")));
                 })
                 .mapAsync(3, (request) -> {
-                    Patterns.ask(CacheActor.props(), )
+                    Patterns.ask(cacheActor, )
                 });
     }
 }
