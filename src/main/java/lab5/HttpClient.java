@@ -21,7 +21,7 @@ public class HttpClient {
                             Integer.parseInt(request.getUri().query().getOrElse("count", "")));
                 })
                 .mapAsync(3, (request) -> {
-                    Patterns.ask()
+                    Patterns.ask(CacheActor.props(), )
                 });
     }
 }
