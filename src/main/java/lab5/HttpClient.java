@@ -8,5 +8,5 @@ import java.net.http.HttpResponse;
 
 public class HttpClient {
 
-    Flow<HttpRequest, HttpResponse, NotUsed> 
+    Flow<HttpRequest, HttpResponse, NotUsed> httpFlow
 }
