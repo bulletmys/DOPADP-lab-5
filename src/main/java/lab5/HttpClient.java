@@ -12,5 +12,6 @@ public class HttpClient {
     Flow<HttpRequest, HttpResponse, NotUsed> httpFlow(ActorMaterializer materializer) {
         return Flow.of(HttpRequest.class)
                 .map()
+                .mapAsync()
     }
 }
