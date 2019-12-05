@@ -29,7 +29,7 @@ public class HttpClient {
                             Integer.parseInt(request.getUri().query().getOrElse("count", "")));
                 })
                 .mapAsync(3, (request) -> {
-                    Patterns.ask(cacheActor, new TestRequest(request))
+                    Patterns.ask(cacheActor, new TestRequest(request), 5000)
                 });
     }
 }
