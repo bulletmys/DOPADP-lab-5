@@ -5,8 +5,6 @@ import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import javafx.util.Pair;
 
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 
 public class HttpClient {
 
