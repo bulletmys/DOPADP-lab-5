@@ -23,6 +23,7 @@ public class HttpClient {
 
     private ActorRef cacheActor;
     private Duration duration = Duration.ofSeconds(5);
+    
 
     HttpClient(ActorSystem system) {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
