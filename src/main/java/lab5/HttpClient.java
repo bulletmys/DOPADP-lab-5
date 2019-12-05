@@ -12,7 +12,9 @@ public class HttpClient {
 
     Flow<HttpRequest, HttpResponse, NotUsed> httpFlow(ActorMaterializer materializer) {
         return Flow.of(HttpRequest.class)
-                .map(request -> new Pair<String, Integer>(request.getUri().))
+                .map(request -> new Pair<String, Integer>(
+                        request.getUri().query().getOrElse("testURL")
+                        ))
 //                .mapAsync()
     }
 }
