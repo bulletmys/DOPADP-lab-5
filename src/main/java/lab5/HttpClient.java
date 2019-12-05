@@ -11,6 +11,7 @@ import akka.pattern.Patterns;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import akka.stream.javadsl.Keep;
+import akka.stream.javadsl.Sink;
 import akka.stream.javadsl.Source;
 
 
@@ -23,7 +24,7 @@ public class HttpClient {
 
     private ActorRef cacheActor;
     private Duration duration = Duration.ofSeconds(5);
-    
+    private Sink
 
     HttpClient(ActorSystem system) {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
