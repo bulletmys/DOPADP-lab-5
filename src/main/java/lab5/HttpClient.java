@@ -36,7 +36,7 @@ public class HttpClient {
                                     if (response.getClass() == String.class) {
                                         //считаем время и записываем его
                                     } else {
-                                        
+                                        return 
                                     }
                                 })
     });
