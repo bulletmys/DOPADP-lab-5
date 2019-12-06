@@ -33,7 +33,7 @@ public class HttpClient {
                     .mapAsync(3, (request) -> {
                         long startTime = System.currentTimeMillis();
 
-                        
+                        request.
                     })
 
     HttpClient(ActorSystem system) {
