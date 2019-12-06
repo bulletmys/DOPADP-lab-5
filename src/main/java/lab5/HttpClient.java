@@ -13,6 +13,7 @@ import akka.stream.javadsl.Flow;
 import akka.stream.javadsl.Keep;
 import akka.stream.javadsl.Sink;
 import akka.stream.javadsl.Source;
+import org.asynchttpclient.Dsl;
 
 
 import java.time.Duration;
@@ -33,7 +34,7 @@ public class HttpClient {
                     .mapAsync(3, (request) -> {
                         long startTime = System.currentTimeMillis();
 
-                        request.
+                        Dsl.asyncHttpClient().
                     })
 
     HttpClient(ActorSystem system) {
