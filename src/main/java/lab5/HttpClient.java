@@ -35,13 +35,11 @@ public class HttpClient {
                         long startTime = System.currentTimeMillis();
                         long endTime;
 
-                        Dsl.asyncHttpClient()
+                        return Dsl.asyncHttpClient()
                                 .prepareGet(request)
                                 .execute()
                                 .toCompletableFuture()
-                                .thenCompose((response -> {
-                                    endTime = System.
-                                }))
+                                .thenCompose((response -> System.currentTimeMillis() - startTime))
                     })
 
     HttpClient(ActorSystem system) {
