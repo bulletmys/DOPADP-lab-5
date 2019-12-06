@@ -1,6 +1,7 @@
 package lab5;
 
-import javafx.util.Pair;
+
+import akka.japi.Pair;
 
 public class TestRequest {
     private Pair<String, Integer> req;
