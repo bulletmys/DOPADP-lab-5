@@ -2,7 +2,7 @@ package lab5;
 
 public class TestResponse {
     private String hostName;
-    private int averageTime;
+    private long averageTime;
 
     TestResponse(String hostName, int averageTime) {
         this.hostName = hostName;
