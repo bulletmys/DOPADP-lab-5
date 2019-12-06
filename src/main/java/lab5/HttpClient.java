@@ -30,7 +30,9 @@ public class HttpClient {
             Flow
                     .<Pair<String, Integer>>create()
                     .mapConcat((request) -> Collections.nCopies(request.second(), request.first()))
-                    .mapAsync()
+                    .mapAsync(3, (request) -> {
+                        
+                    })
 
     HttpClient(ActorSystem system) {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
