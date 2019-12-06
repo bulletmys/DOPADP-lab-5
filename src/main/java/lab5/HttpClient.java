@@ -41,9 +41,9 @@ public class HttpClient {
                                 .toCompletableFuture()
                                 .thenCompose(((response) ->
                                         CompletableFuture.completedFuture(System.currentTimeMillis() - startTime)
-                                ))
-                                .;
+                                ));
                     })
+                    .toMat()
 
     HttpClient(ActorSystem system) {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
