@@ -39,7 +39,7 @@ public class HttpClient {
                                 .prepareGet(request)
                                 .execute()
                                 .toCompletableFuture()
-                                .thenCompose((response -> System.currentTimeMillis() - startTime))
+                                .thenCompose((response -> System.currentTimeMillis() - startTime));
                     })
 
     HttpClient(ActorSystem system) {
