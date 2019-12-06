@@ -23,7 +23,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Future;
 
 
-public class HttpClient {
+public class HttpClientAsync {
 
     private ActorRef cacheActor;
     private Duration duration = Duration.ofSeconds(5);
@@ -46,11 +46,11 @@ public class HttpClient {
                 .toMat(Sink.fold(0L, Long::sum), Keep.right());
     }
 
-    HttpClient(ActorSystem system) {
+    HttpClientAsync(ActorSystem system) {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
     }
 
-    Flow<HttpRequest, HttpResponse, NotUsed> httpFlow(ActorMaterializer materializer) {
+    public Flow<HttpRequest, HttpResponse, NotUsed> httpFlow(ActorMaterializer materializer) {
         return Flow.of(HttpRequest.class)
                 .map(request -> new Pair<String, Integer>(
                         request.getUri().query().getOrElse("testURL", ""),
