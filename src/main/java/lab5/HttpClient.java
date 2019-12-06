@@ -60,7 +60,8 @@ public class HttpClient {
                                 .thenCompose((response) -> {
                                     if (response.getClass() == String.class) {
                                         Source.from(Collections.singletonList(request))
-                                                .toMat(testSink(), Keep.right()).run(materializer);
+                                                .toMat(testSink(), Keep.right()).run(materializer)
+                                        .thenApply();
                                         return CompletableFuture.completedFuture(response);
                                     } else {
                                         return CompletableFuture.completedFuture(response);
