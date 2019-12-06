@@ -37,6 +37,7 @@ public class HttpClient {
                         Dsl.asyncHttpClient()
                                 .prepareGet(request)
                                 .execute()
+                                .toCompletableFuture()
                                 .
                     })
 
