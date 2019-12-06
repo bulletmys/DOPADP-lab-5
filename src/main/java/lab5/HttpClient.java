@@ -43,7 +43,7 @@ public class HttpClient {
                                         CompletableFuture.completedFuture(System.currentTimeMillis() - startTime)
                                 ));
                     })
-                    .toMat(Sink.fold(0, ))
+                    .toMat(Sink.fold(0, Long::sum))
 
     HttpClient(ActorSystem system) {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
