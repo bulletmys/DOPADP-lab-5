@@ -34,7 +34,10 @@ public class HttpClient {
                     .mapAsync(3, (request) -> {
                         long startTime = System.currentTimeMillis();
 
-                        Dsl.asyncHttpClient().
+                        Dsl.asyncHttpClient()
+                                .prepareGet(request)
+                                .execute()
+                                .
                     })
 
     HttpClient(ActorSystem system) {
