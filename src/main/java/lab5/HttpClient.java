@@ -27,23 +27,24 @@ public class HttpClient {
 
     private ActorRef cacheActor;
     private Duration duration = Duration.ofSeconds(5);
-    private Sink<Pair<String, Integer>, CompletionStage<Integer>> testSink =
-            Flow
-                    .<Pair<String, Integer>>create()
-                    .mapConcat((request) -> Collections.nCopies(request.second(), request.first()))
-                    .mapAsync(3, (request) -> {
-                        long startTime = System.currentTimeMillis();
-                        long endTime;
 
-                        return Dsl.asyncHttpClient()
-                                .prepareGet(request)
-                                .execute()
-                                .toCompletableFuture()
-                                .thenCompose(((response) ->
-                                        CompletableFuture.completedFuture(System.currentTimeMillis() - startTime)
-                                ));
-                    })
-                    .toMat(Sink.fold(0, Long::sum),)
+    Sink<Pair<String, Long>, CompletionStage<Long>> testSink() {
+        return Flow
+                .<Pair<String, Long>>create()
+                .mapConcat((request) -> Collections.nCopies(request.second(), request.first()))
+                .mapAsync(3, (request) -> {
+                    long startTime = System.currentTimeMillis();
+
+                    return Dsl.asyncHttpClient()
+                            .prepareGet(request)
+                            .execute()
+                            .toCompletableFuture()
+                            .thenCompose(((response) ->
+                                    CompletableFuture.completedFuture(System.currentTimeMillis() - startTime)
+                            ));
+                })
+                .toMat(Sink.fold(0L, Long::sum), Keep.right());
+    }
 
     HttpClient(ActorSystem system) {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
@@ -51,9 +52,9 @@ public class HttpClient {
 
     Flow<HttpRequest, HttpResponse, NotUsed> httpFlow(ActorMaterializer materializer) {
         return Flow.of(HttpRequest.class)
-                .map(request -> new Pair<String, Integer>(
+                .map(request -> new Pair<String, Long>(
                         request.getUri().query().getOrElse("testURL", ""),
-                        Integer.parseInt(request.getUri().query().getOrElse("count", ""))))
+                        Long.parseLong(request.getUri().query().getOrElse("count", ""))))
                 .mapAsync(3, (request) ->
                         Patterns.ask(cacheActor, request, duration)
                                 .thenCompose((response) -> {
