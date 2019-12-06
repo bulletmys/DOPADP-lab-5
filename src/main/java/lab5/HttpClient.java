@@ -38,7 +38,7 @@ public class HttpClient {
                                 .prepareGet(request)
                                 .execute()
                                 .toCompletableFuture()
-                                .then
+                                .thenCompose((response -> ))
                     })
 
     HttpClient(ActorSystem system) {
