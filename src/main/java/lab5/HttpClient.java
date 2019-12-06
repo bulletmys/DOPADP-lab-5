@@ -28,9 +28,9 @@ public class HttpClient {
     private ActorRef cacheActor;
     private Duration duration = Duration.ofSeconds(5);
 
-    Sink<Pair<String, Long>, CompletionStage<Long>> testSink() {
+    private Sink<Pair<String, Integer>, CompletionStage<Long>> testSink() {
         return Flow
-                .<Pair<String, Long>>create()
+                .<Pair<String, Integer>>create()
                 .mapConcat((request) -> Collections.nCopies(request.second(), request.first()))
                 .mapAsync(3, (request) -> {
                     long startTime = System.currentTimeMillis();
@@ -52,15 +52,15 @@ public class HttpClient {
 
     Flow<HttpRequest, HttpResponse, NotUsed> httpFlow(ActorMaterializer materializer) {
         return Flow.of(HttpRequest.class)
-                .map(request -> new Pair<String, Long>(
+                .map(request -> new Pair<String, Integer>(
                         request.getUri().query().getOrElse("testURL", ""),
-                        Long.parseLong(request.getUri().query().getOrElse("count", ""))))
+                        Integer.parseInt(request.getUri().query().getOrElse("count", ""))))
                 .mapAsync(3, (request) ->
                         Patterns.ask(cacheActor, request, duration)
                                 .thenCompose((response) -> {
                                     if (response.getClass() == String.class) {
                                         Source.from(Collections.singletonList(request))
-                                                .toMat(testSink, Keep.right()).run(materializer);
+                                                .toMat(testSink(), Keep.right()).run(materializer);
                                         return CompletableFuture.completedFuture(response);
                                     } else {
                                         return CompletableFuture.completedFuture(response);
