@@ -62,7 +62,7 @@ public class HttpClient {
                                         Source.from(Collections.singletonList(request))
                                                 .toMat(testSink(), Keep.right()).run(materializer)
                                         .thenApply((time) -> {
-                                            new TestResponse()
+                                            new TestResponse(request.first(), time)
                                         });
                                         return CompletableFuture.completedFuture(response);
                                     } else {

@@ -4,7 +4,7 @@ public class TestResponse {
     private String hostName;
     private long averageTime;
 
-    TestResponse(String hostName, int averageTime) {
+    TestResponse(String hostName, long averageTime) {
         this.hostName = hostName;
         this.averageTime = averageTime;
     }
@@ -17,7 +17,7 @@ public class TestResponse {
         this.hostName = hostName;
     }
 
-    public int getAverageTime() {
+    public long getAverageTime() {
         return averageTime;
     }
 
