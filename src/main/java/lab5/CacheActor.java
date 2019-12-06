@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class CacheActor extends AbstractActor {
 
-    private HashMap<String, Integer> hashRes = new HashMap<>();
+    private HashMap<String, Long> hashRes = new HashMap<>();
 
     @Override
     public Receive createReceive() {

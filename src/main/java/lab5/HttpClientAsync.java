@@ -50,7 +50,7 @@ public class HttpClientAsync {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
     }
 
-    public Flow<HttpRequest, HttpResponse, NotUsed> httpFlow(ActorMaterializer materializer) {
+    Flow<HttpRequest, HttpResponse, NotUsed> httpFlow(ActorMaterializer materializer) {
         return Flow.of(HttpRequest.class)
                 .map(request -> new Pair<String, Integer>(
                         request.getUri().query().getOrElse("testURL", ""),
