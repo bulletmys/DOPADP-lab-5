@@ -30,7 +30,7 @@ public class HttpClient {
             Flow
                     .<Pair<String, Integer>>create()
             .mapConcat((request) -> {
-                Collections.nCopies(request.first(), request.s)
+                Collections.nCopies(request.second(), request.first())
             })
 
     HttpClient(ActorSystem system) {
