@@ -29,7 +29,9 @@ public class HttpClient {
     private Sink<Pair<String, Integer>, CompletionStage<Integer>> testSink =
             Flow
                     .<Pair<String, Integer>>create()
-            .mapConcat()
+            .mapConcat((request) -> {
+                
+            })
 
     HttpClient(ActorSystem system) {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
