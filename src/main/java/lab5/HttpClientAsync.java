@@ -26,7 +26,7 @@ import java.util.concurrent.Future;
 public class HttpClientAsync {
 
     private ActorRef cacheActor;
-    private Duration duration = Duration.ofSeconds(5);
+    private Duration duration = Duration.ofSeconds(500);
 
     private Sink<Pair<String, Integer>, CompletionStage<Long>> testSink() {
         return Flow
@@ -53,7 +53,7 @@ public class HttpClientAsync {
     Flow<HttpRequest, HttpResponse, NotUsed> httpFlow(ActorMaterializer materializer) {
         return Flow.of(HttpRequest.class)
                 .map(request -> new Pair<String, Integer>(
-                        request.getUri().query().getOrElse("testURL", ""),
+                        request.getUri().query().getOrElse("testUrl", ""),
                         Integer.parseInt(request.getUri().query().getOrElse("count", ""))))
                 .mapAsync(3, (request) ->
                         Patterns.ask(cacheActor, request, duration)
