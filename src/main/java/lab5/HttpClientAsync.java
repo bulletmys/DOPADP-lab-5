@@ -26,7 +26,7 @@ import java.util.concurrent.Future;
 public class HttpClientAsync {
 
     private ActorRef cacheActor;
-    private Duration duration = Duration.ofSeconds(500);
+    private Duration duration = Duration.ofSeconds(5);
 
     private Sink<Pair<String, Integer>, CompletionStage<Long>> testSink() {
         return Flow
@@ -70,7 +70,7 @@ public class HttpClientAsync {
                     cacheActor.tell(value, ActorRef.noSender());
                     return HttpResponse.create().withEntity(
                             HttpEntities.create(
-                                    ((TestResponse) value).getAverageTime() + " --- " + ((TestResponse) value).getHostName()
+                                    ((TestResponse) value).getAverageTime() + "ms  --- " + ((TestResponse) value).getHostName()
                             ));
                 });
     }
