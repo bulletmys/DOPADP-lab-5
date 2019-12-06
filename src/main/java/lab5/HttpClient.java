@@ -33,12 +33,15 @@ public class HttpClient {
                     .mapConcat((request) -> Collections.nCopies(request.second(), request.first()))
                     .mapAsync(3, (request) -> {
                         long startTime = System.currentTimeMillis();
+                        long endTime;
 
                         Dsl.asyncHttpClient()
                                 .prepareGet(request)
                                 .execute()
                                 .toCompletableFuture()
-                                .thenCompose((response -> ))
+                                .thenCompose((response -> {
+                                    endTime = System.
+                                }))
                     })
 
     HttpClient(ActorSystem system) {
