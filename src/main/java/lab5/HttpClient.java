@@ -29,9 +29,8 @@ public class HttpClient {
     private Sink<Pair<String, Integer>, CompletionStage<Integer>> testSink =
             Flow
                     .<Pair<String, Integer>>create()
-            .mapConcat((request) -> {
-                Collections.nCopies(request.second(), request.first());
-            })
+                    .mapConcat((request) -> Collections.nCopies(request.second(), request.first()))
+                    .mapAsync()
 
     HttpClient(ActorSystem system) {
         cacheActor = system.actorOf(CacheActor.props(), "cacheActor");
@@ -39,11 +38,9 @@ public class HttpClient {
 
     Flow<HttpRequest, HttpResponse, NotUsed> httpFlow(ActorMaterializer materializer) {
         return Flow.of(HttpRequest.class)
-                .map(request -> {
-                    return new Pair<String, Integer>(
-                            request.getUri().query().getOrElse("testURL", ""),
-                            Integer.parseInt(request.getUri().query().getOrElse("count", "")));
-                })
+                .map(request -> new Pair<String, Integer>(
+                        request.getUri().query().getOrElse("testURL", ""),
+                        Integer.parseInt(request.getUri().query().getOrElse("count", ""))))
                 .mapAsync(3, (request) ->
                         Patterns.ask(cacheActor, request, duration)
                                 .thenCompose((response) -> {
