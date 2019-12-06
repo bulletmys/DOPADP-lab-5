@@ -70,7 +70,7 @@ public class HttpClientAsync {
                     cacheActor.tell(value, ActorRef.noSender());
                     return HttpResponse.create().withEntity(
                             HttpEntities.create(
-                                    ((TestResponse) value).getAverageTime() + "ms  --- " + ((TestResponse) value).getHostName()
+                                    ((TestResponse) value).getAverageTime() + "ms --- " + ((TestResponse) value).getHostName()
                             ));
                 });
     }
