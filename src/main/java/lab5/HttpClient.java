@@ -59,12 +59,9 @@ public class HttpClient {
                         Patterns.ask(cacheActor, request, duration)
                                 .thenCompose((response) -> {
                                     if (response.getClass() == String.class) {
-                                        Source.from(Collections.singletonList(request))
+                                        return Source.from(Collections.singletonList(request))
                                                 .toMat(testSink(), Keep.right()).run(materializer)
-                                        .thenApply((time) -> {
-                                            new TestResponse(request.first(), time / request.second());
-                                        });
-                                        return CompletableFuture.completedFuture(response);
+                                                .thenApply((time) -> new TestResponse(request.first(), time / request.second()));
                                     } else {
                                         return CompletableFuture.completedFuture(response);
                                     }
