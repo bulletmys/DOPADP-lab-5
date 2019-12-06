@@ -31,6 +31,8 @@ public class HttpClient {
                     .<Pair<String, Integer>>create()
                     .mapConcat((request) -> Collections.nCopies(request.second(), request.first()))
                     .mapAsync(3, (request) -> {
+                        long startTime = System.currentTimeMillis();
+
                         
                     })
 
